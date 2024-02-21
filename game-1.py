@@ -1,7 +1,5 @@
 from random import choice
-from typing import Callable, List
-
-from typing import Callable, TypeVar
+from typing import Callable, List, TypeVar
 
 T = TypeVar('T')
 PredicateFn = Callable[[T], bool]
@@ -15,7 +13,7 @@ INITIAL_GAME_STATE = {
 def is_alive(lives: int) -> bool:
   return lives > 0
 
-def is_remain(items: list) -> int:
+def is_remain(items: List[T]) -> int:
   return len(items) > 0
 
 def is_same_name(word: str):
