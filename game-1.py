@@ -44,21 +44,20 @@ def find_index(char: chr, chars: List[chr]) -> int:
   except ValueError:
     return -1
 
-def replace_char_in_clue_chars(char: chr, name: str, clue: List[chr]) -> List[chr]:
+def replace_char_in_clue_chars(guessed_char: chr, name: str, clue: List[chr]) -> List[chr]:
   found_idx: int = -1
   name_chars = list(name)
-  updated_clue = clue.copy()
-  print(name_chars)
+  # updated_clue = clue.copy()
 
-  while find_index(char, name_chars) >= 0:
-    found_idx = name_chars.index(char)
-    if found_idx >= 0:
-      updated_clue = [name[found_idx] if idx == found_idx else c for idx, c in enumerate(updated_clue)]
-      name_chars = ['' if idx == found_idx else c for idx, c in enumerate(name_chars)]
-      print('chars:', name_chars)
-    else:
-      updated_clue = clue
+  # while find_index(char, name_chars) >= 0:
+  #   found_idx = name_chars.index(char)
+  #   if found_idx >= 0:
+  #     updated_clue = [name[found_idx] if idx == found_idx else c for idx, c in enumerate(updated_clue)]
+  #     name_chars = ['' if idx == found_idx else c for idx, c in enumerate(name_chars)]
+  #   else:
+  #     updated_clue = clue
 
+  updated_clue = [c if c == guessed_char else '?' for c in name_chars]
 
   return updated_clue
 
