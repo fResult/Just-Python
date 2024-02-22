@@ -1,0 +1,14 @@
+{
+  "cSpell.words": [
+    "cherprang"
+  ],
+  "pylint": {
+    "indent-string": "  "
+  },
+  "[python]": {
+    "editor": {
+      "tabSize": 2,
+      "insertSpaces": 2
+    }
+  }
+}
