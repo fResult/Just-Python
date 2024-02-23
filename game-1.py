@@ -35,9 +35,11 @@ def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
 
 is_not_remain = negate(is_remain)
 
-def is_guessed_all_chars(guessed_word: str, clue_characters: List[str]) -> bool:
-  clue_word = ''.join(clue_characters)
-  return guessed_word == clue_word
+def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[List[str]], bool]:
+  def for_clue_characters (clue_characters: List[str]) -> bool:
+    clue_word = ''.join(clue_characters)
+    return guessed_word == clue_word
+  return for_clue_characters
 
 def is_equal[T](y: T) -> Callable[[T], bool]:
   for_x: Callable[[T], bool] = lambda x: x == y
@@ -123,8 +125,11 @@ def game_cycle(game_state: GameState) -> GameState:
 
   clue_chars = create_clue_characters(picked_word)
 
+  is_remaining_some_clue_chars = negate(is_guessed_all_chars_in_word(picked_word))
   update_clue_by_guessed_char_and_clue_chars = replace_char_in_clue_chars(picked_word)
-  while not(is_guessed_all_chars)(picked_word, clue_chars):
+
+  while is_remaining_some_clue_chars(clue_chars):
+    # TODO: Remove printing `Picked word: {picked_word}` when finish developing this function
     print(f'Clue of the word: {clue_chars}, Picked word: {picked_word}')
     guessed_char = input('Please guess character in a name [a-z]: ')
     clue_chars = update_clue_by_guessed_char_and_clue_chars(guessed_char, clue_chars)
