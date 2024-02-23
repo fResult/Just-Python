@@ -35,9 +35,9 @@ def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
 
 is_not_remain = negate(is_remain)
 
-def is_guessed_all_char(guessed_name: str, clue_characters: List[str]) -> bool:
+def is_guessed_all_chars(guessed_word: str, clue_characters: List[str]) -> bool:
   clue_word = ''.join(clue_characters)
-  return guessed_name == clue_word
+  return guessed_word == clue_word
 
 def is_equal[T](y: T) -> Callable[[T], bool]:
   for_x: Callable[[T], bool] = lambda x: x == y
@@ -67,18 +67,27 @@ def repeat_chars(n: int) -> Callable[[str], str]:
 def create_clue_characters(word: str) -> str:
   return list(repeat_chars(len(word))('?'))
 
-def replace_char_in_clue_chars(guessed_char: str, name: str) -> List[str]:
+def replace_char_in_clue_chars(word_to_guess: str) -> Callable[[str, List[str]], List[str]]:
   """Replace character in the list of character
 
   Args:
-      guessed_char (str): Only 1 character
-      name (str): String
-
-  Returns:
-      List[str]: Replaced list of character
+    word_to_guess (str): Word
   """
-  name_chars = list(name)
-  return [ch if ch == guessed_char else '?' for ch in name_chars]
+
+  def for_guessed_char_and_clue(guessed_char: str, clue_chars: List[str]) -> List[str]:
+    """
+    Args:
+      guessed_char (str): Only 1 character
+      clue (List[str]): Example: `['?', '?', '?', '?']`
+
+    Returns:
+      List[str]: Replaced list of character
+    """
+    word_chars = list(word_to_guess)
+    pairs_of_clue_word = list(zip(clue_chars, word_chars))
+    return [word_ch if word_ch == guessed_char else clue_ch for (clue_ch, word_ch) in pairs_of_clue_word]
+
+  return for_guessed_char_and_clue
 
 def not_equal_to_word(name: str) -> bool:
   """Use until create `compose` function"""
@@ -112,12 +121,16 @@ def game_cycle(game_state: GameState) -> GameState:
   current_game_state = copy_game_state(game_state)
   picked_word = pick_item_from_list(current_game_state['words'])
 
-  print(f'Picked word: {picked_word}')
-  guessed_char = input('Please guess character in a name [a-z]: ')
   clue_chars = create_clue_characters(picked_word)
-  replaced_chars = replace_char_in_clue_chars(guessed_char, picked_word)
-  print(f'Clue characters: {replaced_chars}, Guessed char: {guessed_char}')
-  return current_game_state
+
+  update_clue_by_guessed_char_and_clue_chars = replace_char_in_clue_chars(picked_word)
+  while not(is_guessed_all_chars)(picked_word, clue_chars):
+    print(f'Clue of the word: {clue_chars}, Picked word: {picked_word}')
+    guessed_char = input('Please guess character in a name [a-z]: ')
+    clue_chars = update_clue_by_guessed_char_and_clue_chars(guessed_char, clue_chars)
+    print(f'Clue characters: {clue_chars}, Guessed char: {guessed_char}')
+
+  return game_cycle(current_game_state)
 
 # remaining_words = INITIAL_GAME_STATE['words']
 # picked_name = pick_item_from_list(remaining_words)
