@@ -45,16 +45,16 @@ def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[List[str]], boo
     return guessed_word == clue_word
   return for_clue_characters
 
-def is_equal[T](y: T) -> Callable[[T], bool]:
+def is_equal[T](y: T):
   for_x: Callable[[T], bool] = lambda x: x == y
   return for_x
 
-def filter_by[T](predicate: PredicateFn[T]) -> Callable[[List[T]], List[T]]:
+def filter_by[T](predicate: PredicateFn[T]):
   def for_xs(xs: List[T]) -> List[T]:
     return [x for x in xs if predicate(x)]
   return for_xs
 
-def map_by[T, R](f: MapperFn[T, R]) -> Callable[[List[T]], List[R]]:
+def map_by[T, R](f: MapperFn[T, R]):
   def for_xs(xs: List[T]) -> List[R]:
     return [f(x) for x in xs]
   return for_xs
@@ -65,7 +65,7 @@ def pick_item_from_list[T](items: List[T]) -> T:
   except  (IndexError):
     IndexError('Error: Cannot pick item bec of the list is empty')
 
-def repeat_chars(n: int) -> Callable[[str], str]:
+def repeat_chars(n: int):
   def for_str(string: str) -> str:
     return n * string
   return for_str
@@ -74,22 +74,22 @@ def create_clue_characters(word: str) -> str:
   return list(repeat_chars(len(word))('?'))
 
 # TODO: Add score +10 when guessing character is correct.
-def replace_char_in_clue_chars(word_to_guess: str) -> Callable[[str, List[str]], List[str]]:
+def replace_char_in_clue_chars(word_to_guess: str):
   """Replace character in the list of character
 
   Args:
     word_to_guess (str): Word
+
+  Returns:
+    ((str, List[str]) -> List[str]): The `for_guessed_char_and_clue` function which...
+      Args:
+        guessed_char (str): Only 1 character
+        clue (List[str]): Example: `['?', '?', '?', '?']`
+
+      Returns:
+        List[str]: Replaced list of character
   """
-
   def for_guessed_char_and_clue(guessed_char: str, clue_chars: List[str]) -> List[str]:
-    """
-    Args:
-      guessed_char (str): Only 1 character
-      clue (List[str]): Example: `['?', '?', '?', '?']`
-
-    Returns:
-      List[str]: Replaced list of character
-    """
     word_chars = list(word_to_guess)
     pairs_of_clue_word = list(zip(clue_chars, word_chars))
     return [word_ch if word_ch == guessed_char else clue_ch for (clue_ch, word_ch) in pairs_of_clue_word]
@@ -126,12 +126,12 @@ def update_game_state(game_state: GameState):
 def display_clue_chars(clue_chars: List[str]) -> str:
   return f'| {' | '.join(clue_chars)} |'
 
-def add_score_to_game_state(game_state: GameState) -> Callable[[int], GameState]:
+def add_score_to_game_state(game_state: GameState):
   def add_score(score_to_add: int) -> GameState:
     return update_game_state(game_state)('score', score_to_add)
   return add_score
 
-def remove_current_word_from_game_state(game_state: GameState) -> Callable[[str], GameState]:
+def remove_current_word_from_game_state(game_state: GameState):
   def remove_current_word(word_to_remove: str) -> GameState:
     words = game_state['words']
     return update_game_state(game_state)(
@@ -161,11 +161,9 @@ def game_words_cycle(game_state: GameState) -> GameState:
     clue_chars = update_clue_by_guessed_char_and_clue_chars(guessed_char, clue_chars)
     print(f'Clue characters: {display_clue_chars(clue_chars)}, Guessed char: {guessed_char}')
 
-    # TODO: if `is_guessed_all_chars_in_word`, cut the current word off the `game_state['words']`
-
   # Use `compose` function instead
-  current_game_state = add_score_to_game_state(current_game_state)(100)
-  current_game_state = remove_current_word_from_game_state(current_game_state)(picked_word)
+  current_game_state = add_score_to_game_state(current_game_state)(score_to_add = 100)
+  current_game_state = remove_current_word_from_game_state(current_game_state)(word_to_remove = picked_word)
   print(
     f"""
     You are correct!
