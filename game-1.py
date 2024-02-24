@@ -12,6 +12,9 @@ INITIAL_GAME_STATE = {
   "score": 0,
   "lives": 5,
   "words": ['lisa', 'cherprang', 'jaa', 'korn', 'jennie'],
+  # TODO: May need `picked_word` and `clue`(?)
+  # "picked_word": '',
+  # "clue": [],
 }
 
 def copy_game_state(game_state: GameState) -> GameState:
@@ -35,6 +38,7 @@ def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
 
 is_not_remain = negate(is_remain)
 
+# TODO: Add score +100 when guessing word is correct
 def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[List[str]], bool]:
   def for_clue_characters (clue_characters: List[str]) -> bool:
     clue_word = ''.join(clue_characters)
@@ -69,6 +73,7 @@ def repeat_chars(n: int) -> Callable[[str], str]:
 def create_clue_characters(word: str) -> str:
   return list(repeat_chars(len(word))('?'))
 
+# TODO: Add score +10 when guessing character is correct.
 def replace_char_in_clue_chars(word_to_guess: str) -> Callable[[str, List[str]], List[str]]:
   """Replace character in the list of character
 
@@ -98,12 +103,16 @@ def not_equal_to_word(name: str) -> bool:
 def filter_picked_word_out(word: str) -> Callable[[List[str]], List[str]]:
   return filter_by(not_equal_to_word(word))
 
+def create_hearts_display_by_lives(lives: int) -> str:
+  MAX_LIVES = 5
+  return "  ".join(repeat_chars(lives)('🩷').ljust(MAX_LIVES, '❌'))
+
 def display_game_state(game_state: GameState) -> None:
+  print('game_state', game_state)
   print(
     f"""
-    You {game_state['words']}
     Your score: {game_state['score']}
-    Remaining lives: {repeat_chars(game_state['lives'])('♥️')}
+    Remaining lives: {create_hearts_display_by_lives(game_state['lives'])}
     """
   )
 
@@ -114,7 +123,24 @@ def update_game_state(game_state: GameState):
     return current_game_state
   return for_key_and_val
 
-def game_cycle(game_state: GameState) -> GameState:
+def display_clue_chars(clue_chars: List[str]) -> str:
+  return f'| {' | '.join(clue_chars)} |'
+
+def add_score_to_game_state(game_state: GameState) -> Callable[[int], GameState]:
+  def add_score(score_to_add: int) -> GameState:
+    return update_game_state(game_state)('score', score_to_add)
+  return add_score
+
+def remove_current_word_from_game_state(game_state: GameState) -> Callable[[str], GameState]:
+  def remove_current_word(word_to_remove: str) -> GameState:
+    words = game_state['words']
+    return update_game_state(game_state)(
+      'words',
+      filter_by(not_equal_to_word(word_to_remove))(words),
+    )
+  return remove_current_word
+
+def game_words_cycle(game_state: GameState) -> GameState:
   if is_game_over(game_state):
     print(f"You {"win!" if is_not_remain(game_state['words']) else "lose!"}")
     display_game_state(game_state)
@@ -130,12 +156,25 @@ def game_cycle(game_state: GameState) -> GameState:
 
   while is_remaining_some_clue_chars(clue_chars):
     # TODO: Remove printing `Picked word: {picked_word}` when finish developing this function
-    print(f'Clue of the word: {clue_chars}, Picked word: {picked_word}')
+    print(f'Clue of the word: {display_clue_chars(clue_chars)}, Picked word: {picked_word}')
     guessed_char = input('Please guess character in a name [a-z]: ')
     clue_chars = update_clue_by_guessed_char_and_clue_chars(guessed_char, clue_chars)
-    print(f'Clue characters: {clue_chars}, Guessed char: {guessed_char}')
+    print(f'Clue characters: {display_clue_chars(clue_chars)}, Guessed char: {guessed_char}')
 
-  return game_cycle(current_game_state)
+    # TODO: if `is_guessed_all_chars_in_word`, cut the current word off the `game_state['words']`
+
+  # Use `compose` function instead
+  current_game_state = add_score_to_game_state(current_game_state)(100)
+  current_game_state = remove_current_word_from_game_state(current_game_state)(picked_word)
+  print(
+    f"""
+    You are correct!
+    The current word is {picked_word}
+    """
+  )
+  display_game_state(current_game_state)
+
+  return game_words_cycle(current_game_state)
 
 # remaining_words = INITIAL_GAME_STATE['words']
 # picked_name = pick_item_from_list(remaining_words)
@@ -169,6 +208,6 @@ def main():
   # guessed_char = input('Please guess character in a name [a-z]: ')
   # replaced_chars = replace_char_in_clue_chars(guessed_char, picked_name)
   # print(f'replaced chars: {replaced_chars}')
-  game_cycle(INITIAL_GAME_STATE)
+  game_words_cycle(INITIAL_GAME_STATE)
 
 main()
