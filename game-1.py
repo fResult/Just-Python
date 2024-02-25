@@ -4,17 +4,20 @@ from typing import Callable, List, Literal, Any
 
 type PredicateFn[T] = Callable[[T], bool]
 type MapperFn[T, R] = Callable[[T], R]
-type GameStateKey = Literal['score', 'lives', 'words']
+type GameStateKey = Literal['score', 'lives', 'words', 'picked_word', 'clue_word']
 type GameState = dict[GameStateKey, Any]
+
+SCORE_WORD = 100
+SCORE_CHAR = 10
+MAX_LIVES = 5
 
 # TODO: Use class instead of dictionary
 INITIAL_GAME_STATE = {
   "score": 0,
-  "lives": 5,
+  "lives": MAX_LIVES,
   "words": ['lisa', 'cherprang', 'jaa', 'korn', 'jennie'],
-  # TODO: May need `picked_word` and `clue`(?)
-  # "picked_word": '',
-  # "clue": [],
+  "picked_word": '',
+  "clue_word": '',
 }
 
 def copy_game_state(game_state: GameState) -> GameState:
@@ -29,7 +32,7 @@ def is_remain[T](items: List[T]) -> int:
   return len(items) > 0
 
 def is_game_over(game_state: GameState) -> bool:
-  return game_state['lives'] == 0 or is_not_remain(game_state['words'])
+  return not is_alive(game_state['lives']) or is_not_remain(game_state['words'])
 
 def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
   def for_arg(arg: T) -> bool:
@@ -38,7 +41,6 @@ def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
 
 is_not_remain = negate(is_remain)
 
-# TODO: Add score +100 when guessing word is correct
 def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[List[str]], bool]:
   def for_clue_characters (clue_characters: List[str]) -> bool:
     clue_word = ''.join(clue_characters)
@@ -70,10 +72,9 @@ def repeat_chars(n: int):
     return n * string
   return for_str
 
-def create_clue_characters(word: str) -> str:
+def create_clue_chars(word: str) -> List[str]:
   return list(repeat_chars(len(word))('?'))
 
-# TODO: Add score +10 when guessing character is correct.
 def replace_char_in_clue_chars(word_to_guess: str):
   """Replace character in the list of character
 
@@ -92,7 +93,7 @@ def replace_char_in_clue_chars(word_to_guess: str):
   def for_guessed_char_and_clue(guessed_char: str, clue_chars: List[str]) -> List[str]:
     word_chars = list(word_to_guess)
     pairs_of_clue_word = list(zip(clue_chars, word_chars))
-    return [word_ch if word_ch == guessed_char else clue_ch for (clue_ch, word_ch) in pairs_of_clue_word]
+    return [word_ch if word_ch == guessed_char.lower() else clue_ch for (clue_ch, word_ch) in pairs_of_clue_word]
 
   return for_guessed_char_and_clue
 
@@ -104,7 +105,6 @@ def filter_picked_word_out(word: str) -> Callable[[List[str]], List[str]]:
   return filter_by(not_equal_to_word(word))
 
 def create_hearts_display_by_lives(lives: int) -> str:
-  MAX_LIVES = 5
   return "  ".join(repeat_chars(lives)('🩷').ljust(MAX_LIVES, '❌'))
 
 def display_game_state(game_state: GameState) -> None:
@@ -123,7 +123,7 @@ def update_game_state(game_state: GameState):
   return for_key_and_val
 
 def display_clue_chars(clue_chars: List[str]) -> str:
-  return f'| {' | '.join(clue_chars)} |'
+  return f'| {' | '.join(clue_chars).upper()} |'
 
 def add_score_to_game_state(game_state: GameState):
   def add_score(score_to_add: int) -> GameState:
@@ -146,102 +146,108 @@ def update_lives_in_game_state(game_state: GameState):
     updated_lives = current_lives - 1 if is_equal(clue_chars)(new_clue_chars) else current_lives
 
     if negate(is_equal(current_lives))(update_game_state):
-      print(
-        """
-        You guess wrong!!
-        Lose 1 live!
-        """
-      )
       updated_game_state = update_game_state(game_state)('lives', updated_lives)
       display_game_state(updated_game_state)
     return updated_game_state
 
   return update_lives_by_clue_chars_diff
 
-def game_words_cycle(game_state: GameState) -> GameState:
-  if is_game_over(game_state):
-    print(
-      f"""
-      You {"win!" if is_not_remain(game_state['words']) else "lose!"}
-      """
-    )
-    display_game_state(game_state)
-    return game_state
+def display_guess_result(guessed_char: str):
+  def display_result(clue_word: str) -> None:
+    guessed_correct = guessed_char in clue_word
+    print(f"""
+      You guessed {'correct' if guessed_correct else 'wrong'}!!
+      {'Lose 1 live!' if not(guessed_correct) else f'There are [{guessed_char.upper()}]s in the word'}
+    """.strip(' '))
+  return display_result
 
-  current_game_state = copy_game_state(game_state)
-  picked_word = pick_item_from_list(current_game_state['words'])
-
-  clue_chars = create_clue_characters(picked_word)
-
-  is_remaining_some_clue_chars = negate(is_guessed_all_chars_in_word(picked_word))
-  update_clue_by_guessed_char_and_clue_chars = replace_char_in_clue_chars(picked_word)
-  updated_clue_chars = list(clue_chars)
-
-  while is_remaining_some_clue_chars(updated_clue_chars):
-    # TODO: Remove printing `Picked word: {picked_word}` when finish developing this function
-    print(f'Clue of the word: {display_clue_chars(updated_clue_chars)}, Picked word: {picked_word}')
-    guessed_char = input('Please guess character in a name [a-z]: ')
-    prev_clue_word = ''.join(updated_clue_chars)
-    updated_clue_chars = update_clue_by_guessed_char_and_clue_chars(guessed_char, updated_clue_chars)
-    updated_clue_word = ''.join(updated_clue_chars)
-    print('clue_chars', updated_clue_chars)
-    print(f'Clue characters: {display_clue_chars(updated_clue_chars)}, Guessed char: {guessed_char}')
-
-    not_equal_to_prev_clue_word = negate(is_equal(prev_clue_word))
-
-    current_game_state = add_score_to_game_state(current_game_state)(
-      score_to_add = 10 if not_equal_to_prev_clue_word(updated_clue_word) else 0
-    )
-    current_game_state = update_lives_in_game_state(current_game_state)(
-      clue_chars = prev_clue_word,
-      new_clue_chars = updated_clue_word,
-    )
-
-  # Use `compose` function instead
-  current_game_state = add_score_to_game_state(current_game_state)(score_to_add = 100)
-  current_game_state = remove_current_word_from_game_state(current_game_state)(word_to_remove = picked_word)
+def display_when_word_correct(word: str) -> None:
   print(
     f"""
     You are correct!
-    The current word is {picked_word}
+    The current word is [{word}]
     """
   )
+
+def game_chars_cycle(game_state: GameState):
+  if is_game_over(game_state):
+    return game_state
+
+  picked_word = game_state['picked_word']
+  updated_clue_chars = game_state['clue_word']
+  update_clue_by_guessed_char_and_clue_chars = replace_char_in_clue_chars(picked_word)
+
+  # TODO: Remove printing `Picked word: {picked_word}` when finish developing this function
+  print(f'Clue of the word: {display_clue_chars(updated_clue_chars)}, Picked word: {picked_word}')
+
+  guessed_char = input('Please guess character in a name [a-z]: ')
+
+  prev_clue_word: str = ''.join(updated_clue_chars)
+  updated_clue_chars: List[str] = update_clue_by_guessed_char_and_clue_chars(guessed_char, updated_clue_chars)
+
+  updated_clue_word: str = ''.join(updated_clue_chars)
+  game_state = update_game_state(game_state)('clue_word', updated_clue_word)
+
+  display_guess_result(guessed_char)(updated_clue_word)
+  print(f"""
+    Clue characters: {display_clue_chars(updated_clue_chars)}
+  """)
+
+
+  not_equal_to_prev_clue_word = negate(is_equal(prev_clue_word))
+  game_state = add_score_to_game_state(game_state)(
+    score_to_add = SCORE_CHAR if not_equal_to_prev_clue_word(updated_clue_word) else 0
+  )
+  game_state = update_lives_in_game_state(game_state)(
+    clue_chars = prev_clue_word,
+    new_clue_chars = updated_clue_word,
+  )
+  return game_state
+
+def display_game_result(game_state: GameState) -> None:
+    no_more_words = is_not_remain(game_state['words'])
+    filler = '' if no_more_words else '#'
+    print(
+      f"""
+      ##############{filler}
+      ## You {"win!" if no_more_words else "lose!"} ##
+      ##############{filler}
+      """
+    )
+    display_game_state(game_state)
+
+def game_words_cycle(game_state: GameState) -> GameState:
+  if is_game_over(game_state):
+    display_game_result(game_state)
+    return game_state
+
+  current_game_state = copy_game_state(game_state)
+
+  picked_word: str = pick_item_from_list(current_game_state['words'])
+  current_game_state = update_game_state(current_game_state)('picked_word', picked_word)
+
+  clue_chars = create_clue_chars(picked_word)
+  current_game_state = update_game_state(current_game_state)('clue_word', ''.join(clue_chars))
+
+  is_remaining_some_clue_chars = negate(is_guessed_all_chars_in_word(picked_word))
+  is_not_game_over = negate(is_game_over)
+
+  # cycle = game_chars_cycle(current_game_state)
+  while is_remaining_some_clue_chars(clue_chars) and is_not_game_over(current_game_state):
+    current_game_state = game_chars_cycle(current_game_state)
+    clue_chars = list(current_game_state['clue_word'])
+
+  if (is_not_game_over(current_game_state)):
+    current_game_state = add_score_to_game_state(current_game_state)(score_to_add = SCORE_WORD - SCORE_CHAR)
+    current_game_state = remove_current_word_from_game_state(current_game_state)(word_to_remove = picked_word)
+    display_when_word_correct(picked_word)
+
   display_game_state(current_game_state)
 
   return game_words_cycle(current_game_state)
 
-# remaining_words = INITIAL_GAME_STATE['words']
-# picked_name = pick_item_from_list(remaining_words)
-# remaining_words = filter_picked_word_out(remaining_words)
-
-# print(f'clue word of {picked_name} is: {create_clue_characters(picked_name)}')
-# print('picked name:', picked_name)
-# print('remaining name:', remaining_words)
-# print('remain?:', is_remain(remaining_words))
-
-# picked_name = pick_item_from_list(remaining_words)
-# remaining_words = filter_by(negate(is_equal(picked_name)))(remaining_words)
-# print('picked name:', picked_name)
-# print('remaining name:', remaining_words)
-# print('remain?:', is_remain(remaining_words))
-
-# picked_name = pick_item_from_list(remaining_words)
-# remaining_words = filter_by(negate(is_equal(picked_name)))(remaining_words)
-# print('picked name:', picked_name)
-# print('remaining name:', remaining_words)
-# print('remain?:', is_remain(remaining_words))
 
 def main():
-  # game_state = copy_game_state(INITIAL_GAME_STATE)
-  # remaining_names = INITIAL_GAME_STATE['words']
-  # picked_name = pick_item_from_list(remaining_names)
-  # print('is not remain', is_not_remain(remaining_names))
-  # clue_chars = create_clue_characters(picked_name)
-  # print(f'Picked Name is: {picked_name}')
-  # print(f'Clue Name is: {clue_chars}')
-  # guessed_char = input('Please guess character in a name [a-z]: ')
-  # replaced_chars = replace_char_in_clue_chars(guessed_char, picked_name)
-  # print(f'replaced chars: {replaced_chars}')
   game_words_cycle(INITIAL_GAME_STATE)
 
 main()
