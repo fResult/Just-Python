@@ -7,12 +7,12 @@ type MapperFn[T, R] = Callable[[T], R]
 type GameStateKey = Literal['score', 'lives', 'words', 'picked_word', 'clue_word']
 type GameState = dict[GameStateKey, Any]
 
-SCORE_WORD = 100
-SCORE_CHAR = 10
-MAX_LIVES = 5
+SCORE_WORD: int = 100
+SCORE_CHAR: int = 10
+MAX_LIVES: int = 5
 
 # TODO: Use class instead of dictionary
-INITIAL_GAME_STATE = {
+INITIAL_GAME_STATE: GameState = {
   "score": 0,
   "lives": MAX_LIVES,
   "words": ['lisa', 'cherprang', 'jaa', 'korn', 'jennie'],
@@ -169,7 +169,7 @@ def display_when_word_correct(word: str) -> None:
     """
   )
 
-def game_chars_cycle(game_state: GameState):
+def game_word_cycle(game_state: GameState):
   if is_game_over(game_state):
     return game_state
 
@@ -216,7 +216,7 @@ def display_game_result(game_state: GameState) -> None:
     )
     display_game_state(game_state)
 
-def game_words_cycle(game_state: GameState) -> GameState:
+def game_cycle(game_state: GameState) -> GameState:
   if is_game_over(game_state):
     display_game_result(game_state)
     return game_state
@@ -232,9 +232,8 @@ def game_words_cycle(game_state: GameState) -> GameState:
   is_remaining_some_clue_chars = negate(is_guessed_all_chars_in_word(picked_word))
   is_not_game_over = negate(is_game_over)
 
-  # cycle = game_chars_cycle(current_game_state)
   while is_remaining_some_clue_chars(clue_chars) and is_not_game_over(current_game_state):
-    current_game_state = game_chars_cycle(current_game_state)
+    current_game_state = game_word_cycle(current_game_state)
     clue_chars = list(current_game_state['clue_word'])
 
   if (is_not_game_over(current_game_state)):
@@ -244,10 +243,10 @@ def game_words_cycle(game_state: GameState) -> GameState:
 
   display_game_state(current_game_state)
 
-  return game_words_cycle(current_game_state)
+  return game_cycle(current_game_state)
 
 
 def main():
-  game_words_cycle(INITIAL_GAME_STATE)
+  game_cycle(INITIAL_GAME_STATE)
 
 main()
