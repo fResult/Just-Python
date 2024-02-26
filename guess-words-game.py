@@ -1,11 +1,11 @@
 from random import choice
 from types import MappingProxyType
-from typing import Callable, List, Literal, Any
+from typing import Callable, Literal, Any
 
 type PredicateFn[T] = Callable[[T], bool]
 type MapperFn[T, R] = Callable[[T], R]
 type GameStateKey = Literal['score', 'lives', 'words', 'picked_word', 'clue_word']
-type GameState = dict[GameStateKey, Any]
+type GameState = dict[GameStateKey, list[str] | int | str]
 
 SCORE_WORD: int = 100
 SCORE_CHAR: int = 10
@@ -28,7 +28,7 @@ def copy_game_state(game_state: GameState) -> GameState:
 def is_alive(lives: int) -> bool:
   return lives > 0
 
-def is_remain[T](items: List[T]) -> int:
+def is_remain[T](items: list[T]) -> int:
   return len(items) > 0
 
 def is_game_over(game_state: GameState) -> bool:
@@ -41,8 +41,8 @@ def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
 
 is_not_remain = negate(is_remain)
 
-def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[List[str]], bool]:
-  def for_clue_characters (clue_characters: List[str]) -> bool:
+def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[list[str]], bool]:
+  def for_clue_characters (clue_characters: list[str]) -> bool:
     clue_word = ''.join(clue_characters)
     return guessed_word == clue_word
   return for_clue_characters
@@ -52,16 +52,16 @@ def is_equal[T](y: T):
   return for_x
 
 def filter_by[T](predicate: PredicateFn[T]):
-  def for_xs(xs: List[T]) -> List[T]:
+  def for_xs(xs: list[T]) -> list[T]:
     return [x for x in xs if predicate(x)]
   return for_xs
 
 def map_by[T, R](f: MapperFn[T, R]):
-  def for_xs(xs: List[T]) -> List[R]:
+  def for_xs(xs: list[T]) -> list[R]:
     return [f(x) for x in xs]
   return for_xs
 
-def pick_item_from_list[T](items: List[T]) -> T:
+def pick_item_from_list[T](items: list[T]) -> T:
   try:
     return choice(items)
   except  (IndexError):
@@ -72,7 +72,7 @@ def repeat_chars(n: int):
     return n * string
   return for_str
 
-def create_clue_chars(word: str) -> List[str]:
+def create_clue_chars(word: str) -> list[str]:
   return list(repeat_chars(len(word))('?'))
 
 def replace_char_in_clue_chars(word_to_guess: str):
@@ -82,15 +82,15 @@ def replace_char_in_clue_chars(word_to_guess: str):
     word_to_guess (str): Word
 
   Returns:
-    ((str, List[str]) -> List[str]): The `for_guessed_char_and_clue` function which...
+    ((str, list[str]) -> list[str]): The `for_guessed_char_and_clue` function which...
       Args:
         guessed_char (str): Only 1 character
-        clue (List[str]): Example: `['?', '?', '?', '?']`
+        clue (list[str]): Example: `['?', '?', '?', '?']`
 
       Returns:
-        List[str]: Replaced list of character
+        list[str]: Replaced list of character
   """
-  def for_guessed_char_and_clue(guessed_char: str, clue_chars: List[str]) -> List[str]:
+  def for_guessed_char_and_clue(guessed_char: str, clue_chars: list[str]) -> list[str]:
     word_chars = list(word_to_guess)
     pairs_of_clue_word = list(zip(clue_chars, word_chars))
     return [word_ch if word_ch == guessed_char.lower() else clue_ch for (clue_ch, word_ch) in pairs_of_clue_word]
@@ -122,7 +122,7 @@ def update_game_state(game_state: GameState):
     return current_game_state
   return for_key_and_val
 
-def display_clue_chars(clue_chars: List[str]) -> str:
+def display_clue_chars(clue_chars: list[str]) -> str:
   return f'| {' | '.join(clue_chars)} |'.upper()
 
 def add_score_to_game_state(game_state: GameState):
@@ -183,7 +183,7 @@ def game_word_cycle(game_state: GameState):
   guessed_char = input('Please guess character in a name [a-z]: ')
 
   prev_clue_word: str = ''.join(updated_clue_chars)
-  updated_clue_chars: List[str] = update_clue_by_guessed_char_and_clue_chars(guessed_char, updated_clue_chars)
+  updated_clue_chars: list[str] = update_clue_by_guessed_char_and_clue_chars(guessed_char, updated_clue_chars)
 
   updated_clue_word: str = ''.join(updated_clue_chars)
   game_state = update_game_state(game_state)('clue_word', updated_clue_word)
