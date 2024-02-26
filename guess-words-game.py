@@ -98,10 +98,10 @@ def replace_char_in_clue_chars(word_to_guess: str):
   return for_guessed_char_and_clue
 
 def not_equal_to_word(name: str) -> bool:
-  """Use until create `compose` function"""
+  """TODO: Use until create `compose` function"""
   return negate(is_equal(name))
 
-def filter_picked_word_out(word: str) -> Callable[[List[str]], List[str]]:
+def filter_picked_word_out(word: str):
   return filter_by(not_equal_to_word(word))
 
 def create_hearts_display_by_lives(lives: int) -> str:
@@ -123,7 +123,7 @@ def update_game_state(game_state: GameState):
   return for_key_and_val
 
 def display_clue_chars(clue_chars: List[str]) -> str:
-  return f'| {' | '.join(clue_chars).upper()} |'
+  return f'| {' | '.join(clue_chars)} |'.upper()
 
 def add_score_to_game_state(game_state: GameState):
   def add_score(score_to_add: int) -> GameState:
@@ -141,16 +141,16 @@ def remove_current_word_from_game_state(game_state: GameState):
   return remove_current_word
 
 def update_lives_in_game_state(game_state: GameState):
-  def update_lives_by_clue_chars_diff(clue_chars: str, new_clue_chars: str) -> GameState:
+  def update_lives_by_clue_word_diff(clue_word: str, new_clue_word: str) -> GameState:
     current_lives = game_state['lives']
-    updated_lives = current_lives - 1 if is_equal(clue_chars)(new_clue_chars) else current_lives
+    updated_lives = current_lives - 1 if is_equal(clue_word)(new_clue_word) else current_lives
 
     if negate(is_equal(current_lives))(update_game_state):
       updated_game_state = update_game_state(game_state)('lives', updated_lives)
       display_game_state(updated_game_state)
     return updated_game_state
 
-  return update_lives_by_clue_chars_diff
+  return update_lives_by_clue_word_diff
 
 def display_guess_result(guessed_char: str):
   def display_result(clue_word: str) -> None:
@@ -165,7 +165,7 @@ def display_when_word_correct(word: str) -> None:
   print(
     f"""
     You are correct!
-    The current word is [{word}]
+    The current word is [{word.upper()}]
     """
   )
 
@@ -199,8 +199,8 @@ def game_word_cycle(game_state: GameState):
     score_to_add = SCORE_CHAR if not_equal_to_prev_clue_word(updated_clue_word) else 0
   )
   game_state = update_lives_in_game_state(game_state)(
-    clue_chars = prev_clue_word,
-    new_clue_chars = updated_clue_word,
+    clue_word = prev_clue_word,
+    new_clue_word = updated_clue_word,
   )
   return game_state
 
@@ -244,7 +244,6 @@ def game_cycle(game_state: GameState) -> GameState:
   display_game_state(current_game_state)
 
   return game_cycle(current_game_state)
-
 
 def main():
   game_cycle(INITIAL_GAME_STATE)
