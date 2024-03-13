@@ -1,5 +1,4 @@
 from random import choice
-from types import MappingProxyType
 from typing import Callable, Literal, Any
 
 type PredicateFn[T] = Callable[[T], bool]
@@ -31,7 +30,7 @@ def is_alive(lives: int) -> bool:
     return lives > 0
 
 
-def is_remain[T](items: list[T]) -> int:
+def is_remain[T](items: list[T]) -> bool:
     return len(items) > 0
 
 
@@ -49,7 +48,7 @@ def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:
 is_not_remain = negate(is_remain)
 
 
-def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[list[str]], bool]:
+def is_guessed_all_chars_in_word(guessed_word: str) -> PredicateFn[list[str]]:
     def for_clue_characters(clue_characters: list[str]) -> bool:
         clue_word = "".join(clue_characters)
         return guessed_word == clue_word
@@ -58,7 +57,7 @@ def is_guessed_all_chars_in_word(guessed_word: str) -> Callable[[list[str]], boo
 
 
 def is_equal[T](y: T):
-    for_x: Callable[[T], bool] = lambda x: x == y
+    for_x: PredicateFn[T] = lambda x: x == y
     return for_x
 
 
