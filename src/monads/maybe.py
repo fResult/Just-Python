@@ -1,10 +1,12 @@
 from typing import Self, TypeVar, Callable
 
-R = TypeVar('R')
+R = TypeVar("R")
+
 
 class Maybe:
     def is_some(self: Self) -> bool:
         return self.__class__ == Some
+
 
 class Some[T](Maybe):
     def __init__(self: Self, value: T):

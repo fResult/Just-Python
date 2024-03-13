@@ -1,5 +1,6 @@
 from monads.maybe import Some, Nothing
 
+
 def divide(y: float):
     def for_x(x: float) -> float:
         if y == 0:
