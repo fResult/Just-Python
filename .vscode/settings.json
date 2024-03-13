@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
-    "cherprang"
+    "cherprang",
+    "pymonad"
   ],
   "pylint": {
     "indent-string": "  "
