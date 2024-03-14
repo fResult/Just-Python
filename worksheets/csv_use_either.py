@@ -40,16 +40,14 @@ def remove_n_first_rows(n: int):
 
 
 def extract_column(column_index: int):
-    def for_row(row: list[str]) -> Either[ErrorMessage, list[str]]:
-        columns = row
-
+    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[str]]:
         return (
-            Right([col[column_index] for col in columns])
-            if is_list_more_than(column_index)(columns)
+            Right([cols[column_index] for cols in rows])
+            if is_list_more_than(column_index)(rows)
             else Left(f"Error::[{extract_column.__name__}]: Unable to extract column")
         )
 
-    return for_row
+    return for_rows
 
 
 def is_digit(text: str) -> bool:
@@ -58,10 +56,8 @@ def is_digit(text: str) -> bool:
 
 def convert_to[T, R](converter: MapperFn[T, R]):
     def for_validation_fn(predicate: PredicateFn[T]):
-        def for_columns(columns: list[T]) -> Either[ErrorMessage, R]:
-            converted_column = [
-                converter(col) if predicate(col) else None for col in columns
-            ]
+        def for_xs(xs: list[T]) -> Either[ErrorMessage, R]:
+            converted_column = [converter(x) if predicate(x) else None for x in xs]
 
             return (
                 Right(converted_column)
@@ -69,7 +65,7 @@ def convert_to[T, R](converter: MapperFn[T, R]):
                 else Left(f"Error::[{convert_to.__name__}]: Unable to convert to float")
             )
 
-        return for_columns
+        return for_xs
 
     return for_validation_fn
 
@@ -93,7 +89,8 @@ SCORE_COL_IDX = 1
 extract_score_column = extract_column(SCORE_COL_IDX)
 remove_header_row = remove_n_first_rows(1)
 
-result = (
+# FIXME: Wait for https://github.com/jasondelaat/pymonad/issues/34 is fixed, then update PyMonad version
+avg_score = (
     read_csv_file("src/mocks/example.csv")
     .bind(remove_header_row)
     .bind(extract_score_column)
@@ -101,7 +98,7 @@ result = (
     .bind(average)
 )
 
-if result.is_right():
-    print(f"The average result is {result.value}")
+if avg_score.is_right():
+    print(f"The average result is {avg_score.value}")
 else:
-    print(f"Error: processing data: {result}")
+    print(f"Error: processing data: {avg_score}")
