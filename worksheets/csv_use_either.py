@@ -50,12 +50,15 @@ def extract_column(column_index: int):
 
 def convert_to[T, R](converter: MapperFn[T, R]):
     def for_columns(columns: list[str]):
-        converted_column = [converter(col) if col.isdigit() else None for col in columns]
+        converted_column = [
+            converter(col) if col.isdigit() else None for col in columns
+        ]
 
-        if all(x is not None for x in converted_column):
-            return Right(converted_column)
-
-        return Left(f"Error::[{convert_to.__name__}]: Unable to convert to float")
+        return (
+            Right(converted_column)
+            if all(x is not None for x in converted_column)
+            else Left(f"Error::[{convert_to.__name__}]: Unable to convert to float")
+        )
 
     return for_columns
 
