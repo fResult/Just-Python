@@ -4,8 +4,9 @@ import os
 from typing import Callable
 from pymonad.either import Either, Left, Right
 
-
+type PredicateFn[T] = Callable[[T], bool]
 type MapperFn[T, R] = Callable[[T], R]
+type ErrorMessage = str
 
 
 def is_list_more_than[T](n: int):
@@ -19,18 +20,18 @@ def is_remaining[T](xs: list[T]) -> bool:
     return is_list_more_than(0)(xs)
 
 
-def read_csv_file(file_path: str):
+def read_csv_file(file_path: str) -> Either[ErrorMessage, list[list[str]]]:
     if os.path.isfile(file_path):
         with open(file_path, "r") as csv_file:
-            return Right(row for row in csv.reader(csv_file))
+            return Right([row for row in csv.reader(csv_file)])
 
     return Left("Error: File not found")
 
 
-def remove_row(row_index: int):
-    def for_rows(rows: list[list[str]]):
-        if is_remaining(list):
-            return Right(rows[row_index:])
+def remove_n_first_rows(n: int):
+    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[list[str]]]:
+        if is_remaining(rows):
+            return Right(rows[n:])
 
         return Left("Error: Unable to remove row")
 
@@ -38,11 +39,11 @@ def remove_row(row_index: int):
 
 
 def extract_column(column_index: int):
-    def for_row(row: list[str]):
+    def for_row(row: list[str]) -> Either[ErrorMessage, list[str]]:
         columns = row
 
         return (
-            Right(col[column_index] for col in columns)
+            Right([col[column_index] for col in columns])
             if is_list_more_than(column_index)(columns)
             else Left(f"Error::[{extract_column.__name__}]: Unable to extract column")
         )
@@ -50,22 +51,29 @@ def extract_column(column_index: int):
     return for_row
 
 
+def is_digit(text: str) -> bool:
+    return text.isdigit()
+
+
 def convert_to[T, R](converter: MapperFn[T, R]):
-    def for_columns(columns: list[str]):
-        converted_column = [
-            converter(col) if col.isdigit() else None for col in columns
-        ]
+    def for_validation_fn(predicate: PredicateFn[T]):
+        def for_columns(columns: list[T]) -> Either[ErrorMessage, R]:
+            converted_column = [
+                converter(col) if predicate(col) else None for col in columns
+            ]
 
-        return (
-            Right(converted_column)
-            if all(x is not None for x in converted_column)
-            else Left(f"Error::[{convert_to.__name__}]: Unable to convert to float")
-        )
+            return (
+                Right(converted_column)
+                if all(x is not None for x in converted_column)
+                else Left(f"Error::[{convert_to.__name__}]: Unable to convert to float")
+            )
 
-    return for_columns
+        return for_columns
+
+    return for_validation_fn
 
 
-def average(numbers: list[float]) -> Either[str, float]:
+def average(numbers: list[float]) -> Either[ErrorMessage, float]:
     has_some_numbers = is_remaining
 
     return (
@@ -75,19 +83,24 @@ def average(numbers: list[float]) -> Either[str, float]:
     )
 
 
-print(Right(["1", "2", "3"]).bind(convert_to(float)).bind(average))
-print(Right(["x", "2", "3"]).bind(convert_to(float)).bind(average))
-print(Right([]).bind(convert_to(float)).bind(average))
+print(Right(["1", "2", "3"]).bind(convert_to(float)(is_digit)).bind(average))
+print(Right(["x", "2", "3"]).bind(convert_to(float)(is_digit)).bind(average))
+print(Right([]).bind(convert_to(float)(is_digit)).bind(average))
 
 SCORE_COL_IDX = 1
-HEADER_ROW_IDX = 0
 
 extract_score_column = extract_column(SCORE_COL_IDX)
-remove_header_row = remove_row(HEADER_ROW_IDX)
+remove_header_row = remove_n_first_rows(1)
 
 result = (
     read_csv_file("src/mocks/example.csv")
-        # .bind(remove_header_row)
-        # .bind(extract_score_column)
+    .bind(remove_header_row)
+    .bind(extract_score_column)
+    .bind(convert_to(float)(is_digit))
+    .bind(average)
 )
-print(result)
+
+if result.is_right():
+    print(f"The average result is {result.value}")
+else:
+    print(f"Error: processing data: {result}")

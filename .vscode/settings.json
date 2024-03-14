@@ -1,7 +1,8 @@
 {
   "cSpell.words": [
     "cherprang",
-    "pymonad"
+    "pymonad",
+    "typeshed"
   ],
   "pylint": {
     "indent-string": "  "
@@ -11,5 +12,6 @@
       "tabSize": 2,
       "insertSpaces": 2
     }
-  }
+  },
+  "dbt.queryLimit": 500
 }
