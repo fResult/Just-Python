@@ -2,7 +2,7 @@ import csv
 import os
 
 from typing import Callable
-from pymonad.either import Left, Right
+from pymonad.either import Either, Left, Right
 
 
 type MapperFn[T, R] = Callable[[T], R]
@@ -43,19 +43,33 @@ def extract_column(column_index: int):
         if is_list_more_than(column_index)(columns):
             return Right(col[column_index] for col in columns)
 
-        return Left("Error: Unable to extract column")
+        return Left(f"Error::[{extract_column.__name__}]: Unable to extract column")
 
     return for_row
 
 
-def convert_to[T, R](converter: MapperFn[T, R], columns: list[str]):
-    converted_column = [converter(col) if col.isdigit() else None for col in columns]
+def convert_to[T, R](converter: MapperFn[T, R]):
+    def for_columns(columns: list[str]):
+        converted_column = [converter(col) if col.isdigit() else None for col in columns]
 
-    if all(x is not None for x in converted_column):
-        return Right(converted_column)
+        if all(x is not None for x in converted_column):
+            return Right(converted_column)
 
-    return Left("Error: Unable to convert to float")
+        return Left(f"Error::[{convert_to.__name__}]: Unable to convert to float")
+
+    return for_columns
 
 
-print(convert_to(float, ["1", "2", "3"]))
-print(convert_to(float, ["x", "2", "3"]))
+def average(numbers: list[float]) -> Either[str, float]:
+    has_some_numbers = is_remaining
+
+    return (
+        Right(sum(numbers) / len(numbers))
+        if has_some_numbers(numbers)
+        else Left(f"Error::[{average.__name__}]: Division by zero")
+    )
+
+
+print(Right(["1", "2", "3"]).bind(convert_to(float)).bind(average))
+print(Right(["x", "2", "3"]).bind(convert_to(float)).bind(average))
+print(Right([]).bind(convert_to(float)).bind(average))
