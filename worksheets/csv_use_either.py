@@ -78,3 +78,16 @@ def average(numbers: list[float]) -> Either[str, float]:
 print(Right(["1", "2", "3"]).bind(convert_to(float)).bind(average))
 print(Right(["x", "2", "3"]).bind(convert_to(float)).bind(average))
 print(Right([]).bind(convert_to(float)).bind(average))
+
+SCORE_COL_IDX = 1
+HEADER_ROW_IDX = 0
+
+extract_score_column = extract_column(SCORE_COL_IDX)
+remove_header_row = remove_row(HEADER_ROW_IDX)
+
+result = (
+    read_csv_file("src/mocks/example.csv")
+        # .bind(remove_header_row)
+        # .bind(extract_score_column)
+)
+print(result)
