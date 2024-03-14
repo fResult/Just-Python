@@ -30,10 +30,11 @@ def read_csv_file(file_path: str) -> Either[ErrorMessage, list[list[str]]]:
 
 def remove_n_first_rows(n: int):
     def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[list[str]]]:
-        if is_remaining(rows):
-            return Right(rows[n:])
-
-        return Left("Error: Unable to remove row")
+        return (
+            Right(rows[n:])
+            if is_remaining(rows)
+            else Left("Error: Unable to remove row")
+        )
 
     return for_rows
 
