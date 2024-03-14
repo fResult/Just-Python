@@ -40,10 +40,12 @@ def remove_row(row_index: int):
 def extract_column(column_index: int):
     def for_row(row: list[str]):
         columns = row
-        if is_list_more_than(column_index)(columns):
-            return Right(col[column_index] for col in columns)
 
-        return Left(f"Error::[{extract_column.__name__}]: Unable to extract column")
+        return (
+            Right(col[column_index] for col in columns)
+            if is_list_more_than(column_index)(columns)
+            else Left(f"Error::[{extract_column.__name__}]: Unable to extract column")
+        )
 
     return for_row
 
