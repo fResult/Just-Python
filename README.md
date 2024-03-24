@@ -10,7 +10,7 @@
 Run "Guess Words Game":
 
 ```bash
-python3 guess-words-game.py
+rye run python guess-words-game.py
 ```
 
 Run worksheets:
