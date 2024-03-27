@@ -1,16 +1,23 @@
 from random import choice
-from typing import Callable, Literal, Any
+from typing import Any, Callable, Literal, TypedDict
 
 type PredicateFn[T] = Callable[[T], bool]
 type MapperFn[T, R] = Callable[[T], R]
 type GameStateKey = Literal["score", "lives", "words", "picked_word", "clue_word"]
-type GameState = dict[GameStateKey, list[str] | int | str]
+
+
+class GameState(TypedDict):
+    score: int
+    lives: int
+    words: list[str]
+    picked_word: str
+    clue_word: str
+
 
 SCORE_WORD: int = 100
 SCORE_CHAR: int = 10
 MAX_LIVES: int = 5
 
-# TODO: Use class instead of dictionary
 INITIAL_GAME_STATE: GameState = {
     "score": 0,
     "lives": MAX_LIVES,

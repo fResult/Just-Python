@@ -1,0 +1,828 @@
+[
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Left",
+        "importPath": "pymonad.either",
+        "description": "pymonad.either",
+        "isExtraImport": true,
+        "detail": "pymonad.either",
+        "documentation": {}
+    },
+    {
+        "label": "Right",
+        "importPath": "pymonad.either",
+        "description": "pymonad.either",
+        "isExtraImport": true,
+        "detail": "pymonad.either",
+        "documentation": {}
+    },
+    {
+        "label": "Either",
+        "importPath": "pymonad.either",
+        "description": "pymonad.either",
+        "isExtraImport": true,
+        "detail": "pymonad.either",
+        "documentation": {}
+    },
+    {
+        "label": "Left",
+        "importPath": "pymonad.either",
+        "description": "pymonad.either",
+        "isExtraImport": true,
+        "detail": "pymonad.either",
+        "documentation": {}
+    },
+    {
+        "label": "Right",
+        "importPath": "pymonad.either",
+        "description": "pymonad.either",
+        "isExtraImport": true,
+        "detail": "pymonad.either",
+        "documentation": {}
+    },
+    {
+        "label": "Self",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypeVar",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Self",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TypedDict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "csv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "Some",
+        "importPath": "monads.maybe",
+        "description": "monads.maybe",
+        "isExtraImport": true,
+        "detail": "monads.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Nothing",
+        "importPath": "monads.maybe",
+        "description": "monads.maybe",
+        "isExtraImport": true,
+        "detail": "monads.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "choice",
+        "importPath": "random",
+        "description": "random",
+        "isExtraImport": true,
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"just-python\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"just-python\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"just-python\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"just-python\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV_PROMPT\"]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"just-python\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"../lib/python3.12/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": ".venv.bin.activate_this",
+        "description": ".venv.bin.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": ".venv.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "divide",
+        "kind": 2,
+        "importPath": "src.monads.either",
+        "description": "src.monads.either",
+        "peekOfCode": "def divide(y: int):\n    def for_x(x: int) -> float:\n        return Right(x / y) if y != 0 else Left(\"Error: Division by zero\")\n    return for_x\nresult = Right(10).then(divide(2)).then(divide(5))\nprint(result)",
+        "detail": "src.monads.either",
+        "documentation": {}
+    },
+    {
+        "label": "result",
+        "kind": 5,
+        "importPath": "src.monads.either",
+        "description": "src.monads.either",
+        "peekOfCode": "result = Right(10).then(divide(2)).then(divide(5))\nprint(result)",
+        "detail": "src.monads.either",
+        "documentation": {}
+    },
+    {
+        "label": "Maybe",
+        "kind": 6,
+        "importPath": "src.monads.maybe",
+        "description": "src.monads.maybe",
+        "peekOfCode": "class Maybe:\n    def is_some(self: Self) -> bool:\n        return self.__class__ == Some\nclass Some[T](Maybe):\n    def __init__(self: Self, value: T):\n        self.value = value\n    def map(self: Self, func: Callable[[T], R]) -> Self:\n        return func(self.value)\n    def __str__(self: Self):\n        return f\"Some({self.value})\"",
+        "detail": "src.monads.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Some[T]",
+        "kind": 6,
+        "importPath": "src.monads.maybe",
+        "description": "src.monads.maybe",
+        "peekOfCode": "class Some[T](Maybe):\n    def __init__(self: Self, value: T):\n        self.value = value\n    def map(self: Self, func: Callable[[T], R]) -> Self:\n        return func(self.value)\n    def __str__(self: Self):\n        return f\"Some({self.value})\"\nclass Nothing[T](Maybe):\n    def map(self: Self, func: Callable[[T], R]) -> Self:\n        return self",
+        "detail": "src.monads.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Nothing[T]",
+        "kind": 6,
+        "importPath": "src.monads.maybe",
+        "description": "src.monads.maybe",
+        "peekOfCode": "class Nothing[T](Maybe):\n    def map(self: Self, func: Callable[[T], R]) -> Self:\n        return self\n    def __str__(self: Self) -> Self:\n        return f\"Nothing\"",
+        "detail": "src.monads.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "R",
+        "kind": 5,
+        "importPath": "src.monads.maybe",
+        "description": "src.monads.maybe",
+        "peekOfCode": "R = TypeVar(\"R\")\nclass Maybe:\n    def is_some(self: Self) -> bool:\n        return self.__class__ == Some\nclass Some[T](Maybe):\n    def __init__(self: Self, value: T):\n        self.value = value\n    def map(self: Self, func: Callable[[T], R]) -> Self:\n        return func(self.value)\n    def __str__(self: Self):",
+        "detail": "src.monads.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "removed_n_items[T]",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def removed_n_items[T](n: int) -> Callable[[list[T]], list[T]]:\n    return lambda arr: arr[n:]\ndef lte_n_items[T](n: int) -> Callable[[list[T]], bool]:\n    return lambda items: len(items) <= n\ndef is_same_fixed_arith(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr - prev == second - first\ndef is_same_fixed_geo(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr / prev == second / first\nremoved_2_items = removed_n_items(2)\nlte_2_items = lte_n_items(2)",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "lte_n_items[T]",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def lte_n_items[T](n: int) -> Callable[[list[T]], bool]:\n    return lambda items: len(items) <= n\ndef is_same_fixed_arith(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr - prev == second - first\ndef is_same_fixed_geo(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr / prev == second / first\nremoved_2_items = removed_n_items(2)\nlte_2_items = lte_n_items(2)\ndef is_arithmetic(arr: list[int]) -> bool:\n    if lte_2_items(arr):",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "is_same_fixed_arith",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def is_same_fixed_arith(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr - prev == second - first\ndef is_same_fixed_geo(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr / prev == second / first\nremoved_2_items = removed_n_items(2)\nlte_2_items = lte_n_items(2)\ndef is_arithmetic(arr: list[int]) -> bool:\n    if lte_2_items(arr):\n        return False\n    is_fixed = is_same_fixed_arith(first=arr[0], second=arr[1])",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "is_same_fixed_geo",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def is_same_fixed_geo(first: int, second: int) -> Callable[[int, int], int]:\n    return lambda curr, prev: curr / prev == second / first\nremoved_2_items = removed_n_items(2)\nlte_2_items = lte_n_items(2)\ndef is_arithmetic(arr: list[int]) -> bool:\n    if lte_2_items(arr):\n        return False\n    is_fixed = is_same_fixed_arith(first=arr[0], second=arr[1])\n    return all(\n        is_fixed(n, prev=arr[idx - 1])",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "is_arithmetic",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def is_arithmetic(arr: list[int]) -> bool:\n    if lte_2_items(arr):\n        return False\n    is_fixed = is_same_fixed_arith(first=arr[0], second=arr[1])\n    return all(\n        is_fixed(n, prev=arr[idx - 1])\n        for idx, n in enumerate(removed_2_items(arr), start=2)\n    )\ndef is_geometric(arr: list[int]) -> bool:\n    if lte_2_items(arr):",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "is_geometric",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def is_geometric(arr: list[int]) -> bool:\n    if lte_2_items(arr):\n        return False\n    is_fixed = is_same_fixed_geo(first=arr[0], second=arr[1])\n    return not lte_2_items(arr) and all(\n        is_fixed(curr, prev=arr[idx - 1])\n        for idx, curr in enumerate(removed_2_items(arr), start=2)\n    )\ndef arith_geo(arr: list[int]) -> ArithGeo:\n    return (",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "arith_geo",
+        "kind": 2,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "def arith_geo(arr: list[int]) -> ArithGeo:\n    return (\n        \"Arithmetic\"\n        if is_arithmetic(arr)\n        else \"Geometric\"\n        if is_geometric(arr)\n        else \"-1\"\n    )\nprint(arith_geo([1, 2, 3, 4, 5]) == \"Arithmetic\")\nprint(arith_geo([1, 3, 5, 7, 9]) == \"Arithmetic\")",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "removed_2_items",
+        "kind": 5,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "removed_2_items = removed_n_items(2)\nlte_2_items = lte_n_items(2)\ndef is_arithmetic(arr: list[int]) -> bool:\n    if lte_2_items(arr):\n        return False\n    is_fixed = is_same_fixed_arith(first=arr[0], second=arr[1])\n    return all(\n        is_fixed(n, prev=arr[idx - 1])\n        for idx, n in enumerate(removed_2_items(arr), start=2)\n    )",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "lte_2_items",
+        "kind": 5,
+        "importPath": "worksheets.arith_geo",
+        "description": "worksheets.arith_geo",
+        "peekOfCode": "lte_2_items = lte_n_items(2)\ndef is_arithmetic(arr: list[int]) -> bool:\n    if lte_2_items(arr):\n        return False\n    is_fixed = is_same_fixed_arith(first=arr[0], second=arr[1])\n    return all(\n        is_fixed(n, prev=arr[idx - 1])\n        for idx, n in enumerate(removed_2_items(arr), start=2)\n    )\ndef is_geometric(arr: list[int]) -> bool:",
+        "detail": "worksheets.arith_geo",
+        "documentation": {}
+    },
+    {
+        "label": "is_list_more_than[T]",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def is_list_more_than[T](n: int):\n    def for_list(xs: list[T]) -> bool:\n        return len(xs) > n\n    return for_list\ndef is_remaining[T](xs: list[T]) -> bool:\n    return is_list_more_than(0)(xs)\ndef read_csv_file(file_path: str) -> Either[ErrorMessage, list[list[str]]]:\n    if os.path.isfile(file_path):\n        with open(file_path, \"r\") as csv_file:\n            return Right([row for row in csv.reader(csv_file)])",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "is_remaining[T]",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def is_remaining[T](xs: list[T]) -> bool:\n    return is_list_more_than(0)(xs)\ndef read_csv_file(file_path: str) -> Either[ErrorMessage, list[list[str]]]:\n    if os.path.isfile(file_path):\n        with open(file_path, \"r\") as csv_file:\n            return Right([row for row in csv.reader(csv_file)])\n    return Left(\"Error: File not found\")\ndef remove_n_first_rows(n: int):\n    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[list[str]]]:\n        return (",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "read_csv_file",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def read_csv_file(file_path: str) -> Either[ErrorMessage, list[list[str]]]:\n    if os.path.isfile(file_path):\n        with open(file_path, \"r\") as csv_file:\n            return Right([row for row in csv.reader(csv_file)])\n    return Left(\"Error: File not found\")\ndef remove_n_first_rows(n: int):\n    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[list[str]]]:\n        return (\n            Right(rows[n:])\n            if is_remaining(rows)",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "remove_n_first_rows",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def remove_n_first_rows(n: int):\n    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[list[str]]]:\n        return (\n            Right(rows[n:])\n            if is_remaining(rows)\n            else Left(\"Error: Unable to remove row\")\n        )\n    return for_rows\ndef extract_column(column_index: int):\n    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[str]]:",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "extract_column",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def extract_column(column_index: int):\n    def for_rows(rows: list[list[str]]) -> Either[ErrorMessage, list[str]]:\n        return (\n            Right([cols[column_index] for cols in rows])\n            if is_list_more_than(column_index)(rows)\n            else Left(f\"Error::[{extract_column.__name__}]: Unable to extract column\")\n        )\n    return for_rows\ndef is_digit(text: str) -> bool:\n    return text.isdigit()",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "is_digit",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def is_digit(text: str) -> bool:\n    return text.isdigit()\ndef convert_to[T, R](converter: MapperFn[T, R]):\n    def for_validation_fn(predicate: PredicateFn[T]):\n        def for_xs(xs: list[T]) -> Either[ErrorMessage, R]:\n            converted_column = [converter(x) if predicate(x) else None for x in xs]\n            return (\n                Right(converted_column)\n                if all(x is not None for x in converted_column)\n                else Left(f\"Error::[{convert_to.__name__}]: Unable to convert to float\")",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "convert_to[T",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def convert_to[T, R](converter: MapperFn[T, R]):\n    def for_validation_fn(predicate: PredicateFn[T]):\n        def for_xs(xs: list[T]) -> Either[ErrorMessage, R]:\n            converted_column = [converter(x) if predicate(x) else None for x in xs]\n            return (\n                Right(converted_column)\n                if all(x is not None for x in converted_column)\n                else Left(f\"Error::[{convert_to.__name__}]: Unable to convert to float\")\n            )\n        return for_xs",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "average",
+        "kind": 2,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "def average(numbers: list[float]) -> Either[ErrorMessage, float]:\n    has_some_numbers = is_remaining\n    return (\n        Right(sum(numbers) / len(numbers))\n        if has_some_numbers(numbers)\n        else Left(f\"Error::[{average.__name__}]: Division by zero\")\n    )\nprint(Right([\"1\", \"2\", \"3\"]).bind(convert_to(float)(is_digit)).bind(average))\nprint(Right([\"x\", \"2\", \"3\"]).bind(convert_to(float)(is_digit)).bind(average))\nprint(Right([]).bind(convert_to(float)(is_digit)).bind(average))",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "SCORE_COL_IDX",
+        "kind": 5,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "SCORE_COL_IDX = 1\nextract_score_column = extract_column(SCORE_COL_IDX)\nremove_header_row = remove_n_first_rows(1)\n# FIXME: Wait for https://github.com/jasondelaat/pymonad/issues/34 is fixed, then update PyMonad version\navg_score = (\n    read_csv_file(\"src/mocks/example.csv\")\n    .bind(remove_header_row)\n    .bind(extract_score_column)\n    .bind(convert_to(float)(is_digit))\n    .bind(average)",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "extract_score_column",
+        "kind": 5,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "extract_score_column = extract_column(SCORE_COL_IDX)\nremove_header_row = remove_n_first_rows(1)\n# FIXME: Wait for https://github.com/jasondelaat/pymonad/issues/34 is fixed, then update PyMonad version\navg_score = (\n    read_csv_file(\"src/mocks/example.csv\")\n    .bind(remove_header_row)\n    .bind(extract_score_column)\n    .bind(convert_to(float)(is_digit))\n    .bind(average)\n)",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "remove_header_row",
+        "kind": 5,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "remove_header_row = remove_n_first_rows(1)\n# FIXME: Wait for https://github.com/jasondelaat/pymonad/issues/34 is fixed, then update PyMonad version\navg_score = (\n    read_csv_file(\"src/mocks/example.csv\")\n    .bind(remove_header_row)\n    .bind(extract_score_column)\n    .bind(convert_to(float)(is_digit))\n    .bind(average)\n)\nif avg_score.is_right():",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "avg_score",
+        "kind": 5,
+        "importPath": "worksheets.csv_use_either",
+        "description": "worksheets.csv_use_either",
+        "peekOfCode": "avg_score = (\n    read_csv_file(\"src/mocks/example.csv\")\n    .bind(remove_header_row)\n    .bind(extract_score_column)\n    .bind(convert_to(float)(is_digit))\n    .bind(average)\n)\nif avg_score.is_right():\n    print(f\"The average result is {avg_score.value}\")\nelse:",
+        "detail": "worksheets.csv_use_either",
+        "documentation": {}
+    },
+    {
+        "label": "divide",
+        "kind": 2,
+        "importPath": "worksheets.test_maybe",
+        "description": "worksheets.test_maybe",
+        "peekOfCode": "def divide(y: float):\n    def for_x(x: float) -> float:\n        if y == 0:\n            return Nothing()\n        return Some(x / y)\n    return for_x\ndivided_result = Some(10).map(divide(2)).map(divide(0))\nSome(10).map(divide(5)).map(divide(2)).map(divide(0))\nif divided_result.is_some():\n    print(f\"The result is Right: {divided_result.value}\")",
+        "detail": "worksheets.test_maybe",
+        "documentation": {}
+    },
+    {
+        "label": "divided_result",
+        "kind": 5,
+        "importPath": "worksheets.test_maybe",
+        "description": "worksheets.test_maybe",
+        "peekOfCode": "divided_result = Some(10).map(divide(2)).map(divide(0))\nSome(10).map(divide(5)).map(divide(2)).map(divide(0))\nif divided_result.is_some():\n    print(f\"The result is Right: {divided_result.value}\")\nelse:\n    print(f\"The result is Left: {divided_result}\")\ndivided_result = Some(10).map(divide(0)).map(divide(2))\nif divided_result.is_some():\n    print(f\"The result is Right: {divided_result.value}\")\nelse:",
+        "detail": "worksheets.test_maybe",
+        "documentation": {}
+    },
+    {
+        "label": "divided_result",
+        "kind": 5,
+        "importPath": "worksheets.test_maybe",
+        "description": "worksheets.test_maybe",
+        "peekOfCode": "divided_result = Some(10).map(divide(0)).map(divide(2))\nif divided_result.is_some():\n    print(f\"The result is Right: {divided_result.value}\")\nelse:\n    print(f\"The result is Left: {divided_result}\")\ndivided_result = Some(10).map(divide(2)).map(divide(2.5))\nif divided_result.is_some():\n    print(f\"The result is Right: {divided_result.value}\")\nelse:\n    print(f\"The result is Left: {divided_result}\")",
+        "detail": "worksheets.test_maybe",
+        "documentation": {}
+    },
+    {
+        "label": "divided_result",
+        "kind": 5,
+        "importPath": "worksheets.test_maybe",
+        "description": "worksheets.test_maybe",
+        "peekOfCode": "divided_result = Some(10).map(divide(2)).map(divide(2.5))\nif divided_result.is_some():\n    print(f\"The result is Right: {divided_result.value}\")\nelse:\n    print(f\"The result is Left: {divided_result}\")",
+        "detail": "worksheets.test_maybe",
+        "documentation": {}
+    },
+    {
+        "label": "GameState",
+        "kind": 6,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "class GameState(TypedDict):\n    score: int\n    lives: int\n    words: list[str]\n    picked_word: str\n    clue_word: str\nSCORE_WORD: int = 100\nSCORE_CHAR: int = 10\nMAX_LIVES: int = 5\nINITIAL_GAME_STATE: GameState = {",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "copy_game_state",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def copy_game_state(game_state: GameState) -> GameState:\n    copied_game_state = game_state.copy()\n    copied_game_state[\"words\"] = game_state[\"words\"].copy()\n    return copied_game_state\ndef is_alive(lives: int) -> bool:\n    return lives > 0\ndef is_remain[T](items: list[T]) -> bool:\n    return len(items) > 0\ndef is_game_over(game_state: GameState) -> bool:\n    return not is_alive(game_state[\"lives\"]) or is_not_remain(game_state[\"words\"])",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "is_alive",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def is_alive(lives: int) -> bool:\n    return lives > 0\ndef is_remain[T](items: list[T]) -> bool:\n    return len(items) > 0\ndef is_game_over(game_state: GameState) -> bool:\n    return not is_alive(game_state[\"lives\"]) or is_not_remain(game_state[\"words\"])\ndef negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:\n    def for_arg(arg: T) -> bool:\n        return not predicate(arg)\n    return for_arg",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "is_remain[T]",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def is_remain[T](items: list[T]) -> bool:\n    return len(items) > 0\ndef is_game_over(game_state: GameState) -> bool:\n    return not is_alive(game_state[\"lives\"]) or is_not_remain(game_state[\"words\"])\ndef negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:\n    def for_arg(arg: T) -> bool:\n        return not predicate(arg)\n    return for_arg\nis_not_remain = negate(is_remain)\ndef is_guessed_all_chars_in_word(guessed_word: str) -> PredicateFn[list[str]]:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "is_game_over",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def is_game_over(game_state: GameState) -> bool:\n    return not is_alive(game_state[\"lives\"]) or is_not_remain(game_state[\"words\"])\ndef negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:\n    def for_arg(arg: T) -> bool:\n        return not predicate(arg)\n    return for_arg\nis_not_remain = negate(is_remain)\ndef is_guessed_all_chars_in_word(guessed_word: str) -> PredicateFn[list[str]]:\n    def for_clue_characters(clue_characters: list[str]) -> bool:\n        clue_word = \"\".join(clue_characters)",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "negate[T]",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def negate[T](predicate: PredicateFn[T]) -> PredicateFn[T]:\n    def for_arg(arg: T) -> bool:\n        return not predicate(arg)\n    return for_arg\nis_not_remain = negate(is_remain)\ndef is_guessed_all_chars_in_word(guessed_word: str) -> PredicateFn[list[str]]:\n    def for_clue_characters(clue_characters: list[str]) -> bool:\n        clue_word = \"\".join(clue_characters)\n        return guessed_word == clue_word\n    return for_clue_characters",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "is_guessed_all_chars_in_word",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def is_guessed_all_chars_in_word(guessed_word: str) -> PredicateFn[list[str]]:\n    def for_clue_characters(clue_characters: list[str]) -> bool:\n        clue_word = \"\".join(clue_characters)\n        return guessed_word == clue_word\n    return for_clue_characters\ndef is_equal[T](y: T):\n    for_x: PredicateFn[T] = lambda x: x == y\n    return for_x\ndef filter_by[T](predicate: PredicateFn[T]):\n    def for_xs(xs: list[T]) -> list[T]:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "is_equal[T]",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def is_equal[T](y: T):\n    for_x: PredicateFn[T] = lambda x: x == y\n    return for_x\ndef filter_by[T](predicate: PredicateFn[T]):\n    def for_xs(xs: list[T]) -> list[T]:\n        return [x for x in xs if predicate(x)]\n    return for_xs\ndef map_by[T, R](f: MapperFn[T, R]):\n    def for_xs(xs: list[T]) -> list[R]:\n        return [f(x) for x in xs]",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "filter_by[T]",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def filter_by[T](predicate: PredicateFn[T]):\n    def for_xs(xs: list[T]) -> list[T]:\n        return [x for x in xs if predicate(x)]\n    return for_xs\ndef map_by[T, R](f: MapperFn[T, R]):\n    def for_xs(xs: list[T]) -> list[R]:\n        return [f(x) for x in xs]\n    return for_xs\ndef pick_item_from_list[T](items: list[T]) -> T:\n    try:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "map_by[T",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def map_by[T, R](f: MapperFn[T, R]):\n    def for_xs(xs: list[T]) -> list[R]:\n        return [f(x) for x in xs]\n    return for_xs\ndef pick_item_from_list[T](items: list[T]) -> T:\n    try:\n        return choice(items)\n    except IndexError:\n        IndexError(\"Error: Cannot pick item bec of the list is empty\")\ndef repeat_chars(n: int):",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "pick_item_from_list[T]",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def pick_item_from_list[T](items: list[T]) -> T:\n    try:\n        return choice(items)\n    except IndexError:\n        IndexError(\"Error: Cannot pick item bec of the list is empty\")\ndef repeat_chars(n: int):\n    def for_str(string: str) -> str:\n        return n * string\n    return for_str\ndef create_clue_chars(word: str) -> list[str]:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "repeat_chars",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def repeat_chars(n: int):\n    def for_str(string: str) -> str:\n        return n * string\n    return for_str\ndef create_clue_chars(word: str) -> list[str]:\n    return list(repeat_chars(len(word))(\"?\"))\ndef replace_char_in_clue_chars(word_to_guess: str):\n    \"\"\"Replace character in the list of character\n    Args:\n      word_to_guess (str): Word",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "create_clue_chars",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def create_clue_chars(word: str) -> list[str]:\n    return list(repeat_chars(len(word))(\"?\"))\ndef replace_char_in_clue_chars(word_to_guess: str):\n    \"\"\"Replace character in the list of character\n    Args:\n      word_to_guess (str): Word\n    Returns:\n      ((str, list[str]) -> list[str]): The `for_guessed_char_and_clue` function which...\n        Args:\n          guessed_char (str): Only 1 character",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "replace_char_in_clue_chars",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def replace_char_in_clue_chars(word_to_guess: str):\n    \"\"\"Replace character in the list of character\n    Args:\n      word_to_guess (str): Word\n    Returns:\n      ((str, list[str]) -> list[str]): The `for_guessed_char_and_clue` function which...\n        Args:\n          guessed_char (str): Only 1 character\n          clue (list[str]): Example: `['?', '?', '?', '?']`\n        Returns:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "not_equal_to_word",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def not_equal_to_word(name: str) -> bool:\n    \"\"\"TODO: Use until create `compose` function\"\"\"\n    return negate(is_equal(name))\ndef filter_picked_word_out(word: str):\n    return filter_by(not_equal_to_word(word))\ndef create_hearts_display_by_lives(lives: int) -> str:\n    return \"  \".join(repeat_chars(lives)(\"🩷\").ljust(MAX_LIVES, \"❌\"))\ndef display_game_state(game_state: GameState) -> None:\n    print(\n        f\"\"\"",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "filter_picked_word_out",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def filter_picked_word_out(word: str):\n    return filter_by(not_equal_to_word(word))\ndef create_hearts_display_by_lives(lives: int) -> str:\n    return \"  \".join(repeat_chars(lives)(\"🩷\").ljust(MAX_LIVES, \"❌\"))\ndef display_game_state(game_state: GameState) -> None:\n    print(\n        f\"\"\"\n    Your score: {game_state['score']}\n    Remaining lives: {create_hearts_display_by_lives(game_state['lives'])}\n    \"\"\"",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "create_hearts_display_by_lives",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def create_hearts_display_by_lives(lives: int) -> str:\n    return \"  \".join(repeat_chars(lives)(\"🩷\").ljust(MAX_LIVES, \"❌\"))\ndef display_game_state(game_state: GameState) -> None:\n    print(\n        f\"\"\"\n    Your score: {game_state['score']}\n    Remaining lives: {create_hearts_display_by_lives(game_state['lives'])}\n    \"\"\"\n    )\ndef update_game_state(game_state: GameState):",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "display_game_state",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def display_game_state(game_state: GameState) -> None:\n    print(\n        f\"\"\"\n    Your score: {game_state['score']}\n    Remaining lives: {create_hearts_display_by_lives(game_state['lives'])}\n    \"\"\"\n    )\ndef update_game_state(game_state: GameState):\n    def for_key_and_val(key: GameStateKey, new_value: Any) -> GameState:\n        current_game_state = copy_game_state(game_state)",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "update_game_state",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def update_game_state(game_state: GameState):\n    def for_key_and_val(key: GameStateKey, new_value: Any) -> GameState:\n        current_game_state = copy_game_state(game_state)\n        current_game_state[key] = new_value\n        return current_game_state\n    return for_key_and_val\ndef display_clue_chars(clue_chars: list[str]) -> str:\n    return f'| {' | '.join(clue_chars)} |'.upper()\ndef add_score_to_game_state(game_state: GameState):\n    def add_score(score_to_add: int) -> GameState:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "display_clue_chars",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def display_clue_chars(clue_chars: list[str]) -> str:\n    return f'| {' | '.join(clue_chars)} |'.upper()\ndef add_score_to_game_state(game_state: GameState):\n    def add_score(score_to_add: int) -> GameState:\n        current_score = game_state[\"score\"]\n        return update_game_state(game_state)(\"score\", current_score + score_to_add)\n    return add_score\ndef remove_current_word_from_game_state(game_state: GameState):\n    def remove_current_word(word_to_remove: str) -> GameState:\n        words = game_state[\"words\"]",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "add_score_to_game_state",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def add_score_to_game_state(game_state: GameState):\n    def add_score(score_to_add: int) -> GameState:\n        current_score = game_state[\"score\"]\n        return update_game_state(game_state)(\"score\", current_score + score_to_add)\n    return add_score\ndef remove_current_word_from_game_state(game_state: GameState):\n    def remove_current_word(word_to_remove: str) -> GameState:\n        words = game_state[\"words\"]\n        return update_game_state(game_state)(\n            \"words\",",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "remove_current_word_from_game_state",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def remove_current_word_from_game_state(game_state: GameState):\n    def remove_current_word(word_to_remove: str) -> GameState:\n        words = game_state[\"words\"]\n        return update_game_state(game_state)(\n            \"words\",\n            filter_by(not_equal_to_word(word_to_remove))(words),\n        )\n    return remove_current_word\ndef update_lives_in_game_state(game_state: GameState):\n    def update_lives_by_clue_word_diff(clue_word: str, new_clue_word: str) -> GameState:",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "update_lives_in_game_state",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def update_lives_in_game_state(game_state: GameState):\n    def update_lives_by_clue_word_diff(clue_word: str, new_clue_word: str) -> GameState:\n        current_lives = game_state[\"lives\"]\n        updated_lives = (\n            current_lives - 1 if is_equal(clue_word)(new_clue_word) else current_lives\n        )\n        if negate(is_equal(current_lives))(update_game_state):\n            updated_game_state = update_game_state(game_state)(\"lives\", updated_lives)\n            display_game_state(updated_game_state)\n        return updated_game_state",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "display_guess_result",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def display_guess_result(guessed_char: str):\n    def display_result(clue_word: str) -> None:\n        guessed_correct = guessed_char in clue_word\n        print(\n            f\"\"\"\n      You guessed {'correct' if guessed_correct else 'wrong'}!!\n      {'Lose 1 live!' if not(guessed_correct) else f'There are [{guessed_char.upper()}]s in the word'}\n    \"\"\".strip(\" \")\n        )\n    return display_result",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "display_when_word_correct",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def display_when_word_correct(word: str) -> None:\n    print(\n        f\"\"\"\n    You are correct!\n    The current word is [{word.upper()}]\n    \"\"\"\n    )\ndef game_word_cycle(game_state: GameState):\n    if is_game_over(game_state):\n        return game_state",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "game_word_cycle",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def game_word_cycle(game_state: GameState):\n    if is_game_over(game_state):\n        return game_state\n    picked_word = game_state[\"picked_word\"]\n    updated_clue_chars = game_state[\"clue_word\"]\n    update_clue_by_guessed_char_and_clue_chars = replace_char_in_clue_chars(picked_word)\n    # TODO: Remove printing `Picked word: {picked_word}` when finish developing this function\n    print(\n        f\"Clue of the word: {display_clue_chars(updated_clue_chars)}, Picked word: {picked_word}\"\n    )",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "display_game_result",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def display_game_result(game_state: GameState) -> None:\n    no_more_words = is_not_remain(game_state[\"words\"])\n    filler = \"\" if no_more_words else \"#\"\n    print(\n        f\"\"\"\n      ##############{filler}\n      ## You {\"win!\" if no_more_words else \"lose!\"} ##\n      ##############{filler}\n      \"\"\"\n    )",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "game_cycle",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def game_cycle(game_state: GameState) -> GameState:\n    if is_game_over(game_state):\n        display_game_result(game_state)\n        return game_state\n    current_game_state = copy_game_state(game_state)\n    picked_word: str = pick_item_from_list(current_game_state[\"words\"])\n    current_game_state = update_game_state(current_game_state)(\n        \"picked_word\", picked_word\n    )\n    clue_chars = create_clue_chars(picked_word)",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "def main():\n    game_cycle(INITIAL_GAME_STATE)\nmain()",
+        "detail": "guess-words-game",
+        "documentation": {}
+    },
+    {
+        "label": "is_not_remain",
+        "kind": 5,
+        "importPath": "guess-words-game",
+        "description": "guess-words-game",
+        "peekOfCode": "is_not_remain = negate(is_remain)\ndef is_guessed_all_chars_in_word(guessed_word: str) -> PredicateFn[list[str]]:\n    def for_clue_characters(clue_characters: list[str]) -> bool:\n        clue_word = \"\".join(clue_characters)\n        return guessed_word == clue_word\n    return for_clue_characters\ndef is_equal[T](y: T):\n    for_x: PredicateFn[T] = lambda x: x == y\n    return for_x\ndef filter_by[T](predicate: PredicateFn[T]):",
+        "detail": "guess-words-game",
+        "documentation": {}
+    }
+]
